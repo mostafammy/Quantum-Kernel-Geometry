@@ -3,6 +3,7 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 /data/
-/results/figures/*.png
+# NOTE: Result figures ARE tracked (referenced in README)
+# Add specific debug/temp plots here if needed
 .DS_Store
 

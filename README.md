@@ -1,74 +1,257 @@
-# ⚛️ Quantum Kernel Geometry: Inductive Bias & Expressivity Analysis
+<div align="center">
 
-![Status](https://img.shields.io/badge/Status-Active_Research-success)
-![Focus](https://img.shields.io/badge/Focus-Information_Geometry-blueviolet)
-![Tech](https://img.shields.io/badge/Stack-Qiskit_|_Scikit--Learn-blue)
+# ⚛️ Quantum Kernel Geometry
 
-**Author:** Mostafa Yaser (Daphi)  
-**Topic:** Quantum Machine Learning, Hilbert Space Geometry, Kernel Methods  
+### Inductive Bias & Expressivity Analysis in Hilbert Space
 
----
+[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Qiskit](https://img.shields.io/badge/Qiskit-1.0+-6929C4?style=for-the-badge&logo=qiskit&logoColor=white)](https://qiskit.org)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Research](https://img.shields.io/badge/Status-Active_Research-success?style=for-the-badge)]()
 
-## 🧪 Abstract
-This repository investigates the geometric properties of Quantum Kernel methods compared to classical Radial Basis Function (RBF) kernels. By analyzing the kernel matrices produced by mapping data into high-dimensional Hilbert spaces, we demonstrate two fundamental phenomena:
-1.  **Geometric Divergence:** Quantum feature maps induce "Interference Patterns" that capture non-local structural similarities, unlike the distance-based locality of RBF.
-2.  **The Qubit-Rank Relation:** We prove a direct causal link between qubit count and model expressivity, demonstrating a "Rank Bottleneck" at low qubits ($N=2$) and a "Rank Explosion" at higher qubits ($N=8$).
+_Investigating the geometric properties of Quantum Kernel methods and their computational advantages over classical approaches_
 
----
+<img src="results/figures/kernel_comparison.png" alt="Kernel Comparison Visualization" width="85%"/>
 
-## 👁️ Visual Proof: The "Fog" vs. The "Crystal"
+**Figure 1:** Classical RBF Kernel (left) vs Quantum Fidelity Kernel (right) — demonstrating fundamentally different geometric structures
 
-We compared a classical **RBF Kernel** against a **Quantum Fidelity Kernel** on a structured dataset.
-
-* **Classical RBF (Left):** Exhibits a "diagonal blur." It relies on Euclidean distance, meaning similarity decays smoothly. It is effectively "myopic" (nearsighted).
-* **Quantum Fidelity (Right):** Exhibits a sharp, checkerboard-like interference pattern. High similarity scores appear between distant data points, proving the model is capturing **entanglement-induced correlations** invisible to classical metrics.
-
-![Fog vs Crystal Comparison](results/figures/kernel_comparison.png)
-*(Figure 1: Side-by-side heatmap comparison of Kernel Matrices)*
+</div>
 
 ---
 
-## 📉 Mathematical Proof: Bottleneck & Explosion
+## 📌 TL;DR
 
-Visuals are subjective; Eigenvalues are objective. We analyzed the **Eigenvalue Spectrum** of the kernel matrices to measure the Effective Dimension (Rank) of the feature space.
+> **For Recruiters & Busy Readers**
 
-### Experiment A: The 2-Qubit Bottleneck
-At $N=2$ qubits, the Hilbert space dimension is small ($2^2 = 4$).
-* **Observation:** The Quantum Rank crashes early.
-* **Conclusion:** Low-qubit quantum models act as **Dimensionality Compressors**. They force data into a constrained subspace, which can be useful for regularization but limits expressivity.
+- 🔬 **What**: Rigorous comparison of Quantum vs Classical kernel methods using information geometry
+- 📊 **Key Finding**: Quantum kernels capture **non-local correlations** invisible to classical distance metrics
+- 🚀 **Impact**: Mathematical proof that qubit count directly controls model expressivity (Rank Bottleneck → Rank Explosion)
 
-### Experiment B: The 8-Qubit Rank Explosion
-At $N=8$ qubits, the Hilbert space dimension expands ($2^8 = 256$).
-* **Observation:** The Quantum Eigenvalues stay higher for longer, matching and eventually surpassing the classical RBF tail.
-* **Conclusion:** Increasing hardware scale unlocks massive expressivity, allowing the model to capture complex, high-dimensional manifolds.
+---
 
-![Rank Explosion](results/figures/high_dim_scaling.png)
-*(Figure 2: Log-scale Eigenvalue Spectrum showing the Rank Explosion at 8 Qubits)*
+## 📖 Abstract
+
+This research investigates the **geometric properties** of Quantum Kernel methods compared to classical Radial Basis Function (RBF) kernels. By analyzing kernel matrices produced when mapping data into high-dimensional Hilbert spaces, we demonstrate two fundamental phenomena:
+
+| Phenomenon               | Description                                                                                                                                         |
+| :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Geometric Divergence** | Quantum feature maps induce "interference patterns" capturing non-local structural similarities, unlike the distance-based locality of RBF          |
+| **Qubit-Rank Relation**  | Direct causal link between qubit count and model expressivity — a "Rank Bottleneck" at low qubits (N=2) and "Rank Explosion" at higher qubits (N=8) |
+
+---
+
+## 🎯 Key Findings
+
+### 1. The "Fog" vs "Crystal" Phenomenon
+
+We compared a classical **RBF Kernel** against a **Quantum Fidelity Kernel** on structured data:
+
+| Kernel Type          | Behavior                        | Geometry                                   |
+| :------------------- | :------------------------------ | :----------------------------------------- |
+| **Classical RBF**    | Diagonal blur pattern           | Distance-based, "myopic" (nearsighted)     |
+| **Quantum Fidelity** | Sharp checkerboard interference | Captures entanglement-induced correlations |
+
+The quantum kernel reveals **high similarity scores between distant data points**, proving the model captures correlations invisible to classical Euclidean metrics.
+
+---
+
+### 2. Mathematical Proof: Eigenvalue Spectrum Analysis
+
+Visuals are subjective; **eigenvalues are objective**. We analyzed the eigenvalue spectrum of kernel matrices to measure the Effective Dimension (Rank) of feature spaces.
+
+<div align="center">
+<img src="results/figures/eigenvalue_spectrum.png" alt="Eigenvalue Spectrum" width="75%"/>
+
+**Figure 2:** Log-scale eigenvalue comparison showing expressivity differences
+
+</div>
+
+---
+
+### 3. The Qubit Scaling Law
+
+<div align="center">
+<img src="results/figures/high_dim_scaling.png" alt="High Dimensional Scaling" width="75%"/>
+
+**Figure 3:** Rank Explosion at 8 Qubits — Quantum eigenvalues maintain magnitude longer than classical RBF
+
+</div>
+
+| Experiment     | Qubits | Hilbert Dim | Observation                                                           |
+| :------------- | :----- | :---------- | :-------------------------------------------------------------------- |
+| **Bottleneck** | N=2    | 2²=4        | Quantum rank crashes early → acts as dimensionality compressor        |
+| **Explosion**  | N=8    | 2⁸=256      | Quantum eigenvalues surpass classical → massive expressivity unlocked |
+
+> **Conclusion**: Increasing quantum hardware scale unlocks expressivity for capturing complex, high-dimensional manifolds.
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+graph TB
+    subgraph Data["📊 Data Layer"]
+        A[Synthetic Dataset<br/>make_circles / make_classification]
+    end
+
+    subgraph Processing["⚙️ Processing Layer"]
+        B[MinMaxScaler<br/>Scale to 0-2π]
+    end
+
+    subgraph Kernels["🧮 Kernel Computation"]
+        C[Classical RBF<br/>sklearn.rbf_kernel]
+        D[Quantum Fidelity<br/>ZZFeatureMap + Qiskit]
+    end
+
+    subgraph Analysis["📈 Analysis Layer"]
+        E[Eigenvalue Decomposition<br/>numpy.linalg.eigvalsh]
+        F[Heatmap Visualization<br/>seaborn.heatmap]
+    end
+
+    subgraph Output["📁 Results"]
+        G[kernel_comparison.png]
+        H[eigenvalue_spectrum.png]
+        I[high_dim_scaling.png]
+    end
+
+    A --> B
+    B --> C
+    B --> D
+    C --> E
+    D --> E
+    C --> F
+    D --> F
+    E --> H
+    E --> I
+    F --> G
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Python 3.9 or higher
+- pip package manager
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/mostafayaser/quantum-kernel-geometry.git
+cd quantum-kernel-geometry
+
+# Create virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Run Experiments
+
+```bash
+# Experiment 1: Visual Kernel Comparison (Fog vs Crystal)
+python notebooks/02_kernel_comparison_script.py
+
+# Experiment 2: Eigenvalue Spectrum Analysis (2-Qubit Bottleneck)
+python notebooks/03_eigenvalue_analysis.py
+
+# Experiment 3: High-Dimensional Scaling (8-Qubit Rank Explosion)
+python notebooks/04_high_dim_scaling.py
+```
+
+> ⏱️ **Note**: The 8-qubit experiment may take 10-20 seconds on CPU due to quantum simulation overhead.
 
 ---
 
 ## 📂 Repository Structure
 
-| Module | Description |
-| :--- | :--- |
-| `src/` | Modular implementation of Quantum Feature Maps and Geometric Analysis tools. |
-| `notebooks/02_...` | **Visual Analysis:** Generates the "Fog vs Crystal" heatmaps. |
-| `notebooks/03_...` | **Bottleneck Analysis:** Demonstrates the rank limits of 2-qubit systems. |
-| `notebooks/04_...` | **Scaling Analysis:** Demonstrates the rank explosion of 8-qubit systems. |
-| `results/figures/` | Contains the generated proof plots and artifacts. |
+```
+quantum-kernel-geometry/
+├── 📁 notebooks/                    # Experiment scripts
+│   ├── 02_kernel_comparison_script.py   # Heatmap visualization
+│   ├── 03_eigenvalue_analysis.py        # 2-qubit spectral analysis
+│   └── 04_high_dim_scaling.py           # 8-qubit scaling experiment
+│
+├── 📁 src/                          # Modular source code
+│   ├── classical/                   # Classical kernel implementations
+│   ├── quantum/                     # Quantum feature maps & kernels
+│   └── visualization/               # Plotting utilities
+│
+├── 📁 results/
+│   └── figures/                     # Generated visualizations
+│       ├── kernel_comparison.png
+│       ├── eigenvalue_spectrum.png
+│       └── high_dim_scaling.png
+│
+├── 📁 data/                         # Data storage (gitignored)
+├── 📄 requirements.txt              # Python dependencies
+├── 📄 LICENSE                       # MIT License
+└── 📄 README.md                     # This file
+```
 
 ---
 
-## 🚀 Reproduction
+## 🛠️ Tech Stack
 
-To reproduce these scientific findings, clone the repository and run the experiments:
+<div align="center">
 
-```bash
-# 1. Install Dependencies
-pip install -r requirements.txt
+| Category              | Technologies                                                                                                                                                                                                            |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Quantum Computing** | ![Qiskit](https://img.shields.io/badge/Qiskit-6929C4?style=flat-square&logo=qiskit&logoColor=white) ![Qiskit ML](https://img.shields.io/badge/Qiskit_ML-6929C4?style=flat-square&logo=qiskit&logoColor=white)           |
+| **Machine Learning**  | ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white) |
+| **Visualization**     | ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=flat-square&logo=python&logoColor=white) ![Seaborn](https://img.shields.io/badge/Seaborn-3776AB?style=flat-square&logo=python&logoColor=white)       |
+| **Data**              | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white)                                                                                                                     |
 
-# 2. Run the Visual Comparison
-python notebooks/02_kernel_comparison_script.py
+</div>
 
-# 3. Run the Scaling Experiment (Rank Explosion)
-python notebooks/04_high_dim_scaling.py
+---
+
+## 🔮 Future Work
+
+- [ ] Extend analysis to real quantum hardware (IBM Quantum, IonQ)
+- [ ] Investigate noise effects on kernel expressivity
+- [ ] Benchmark on real-world datasets (MNIST, molecular data)
+- [ ] Develop hybrid classical-quantum kernel ensembles
+- [ ] Add automated hyperparameter tuning for feature maps
+
+---
+
+## 📚 Citation
+
+If you use this work in your research, please cite:
+
+```bibtex
+@software{yaser2026quantum,
+  author       = {Yaser, Mostafa},
+  title        = {Quantum Kernel Geometry: Inductive Bias & Expressivity Analysis},
+  year         = {2026},
+  publisher    = {GitHub},
+  url          = {https://github.com/mostafayaser/quantum-kernel-geometry}
+}
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👤 Author
+
+**Mostafa Yaser**
+
+_Quantum Machine Learning Researcher_
+
+---
+
+<div align="center">
+
+**⭐ If this research helps your work, consider giving it a star!**
+
+</div>
