@@ -7,6 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Qiskit](https://img.shields.io/badge/Qiskit-1.0+-6929C4?style=for-the-badge&logo=qiskit&logoColor=white)](https://qiskit.org)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Binder](https://img.shields.io/badge/Launch-Binder-579ACA?style=for-the-badge&logo=jupyter&logoColor=white)](https://mybinder.org/v2/gh/mostafammy/Quantum-Kernel-Geometry/HEAD)
 [![Research](https://img.shields.io/badge/Status-Active_Research-success?style=for-the-badge)]()
 
 _Investigating the geometric properties of Quantum Kernel methods and their computational advantages over classical approaches_
@@ -130,17 +131,20 @@ graph TB
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### 🌐 Try in Your Browser (No Installation!)
 
-- Python 3.9 or higher
-- pip package manager
+Click the Binder badge above or use this link to launch the notebooks instantly:
 
-### Installation
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mostafammy/Quantum-Kernel-Geometry/HEAD)
+
+### Local Installation
+
+**Prerequisites:** Python 3.9+, pip
 
 ```bash
 # Clone the repository
-git clone https://github.com/mostafayaser/quantum-kernel-geometry.git
-cd quantum-kernel-geometry
+git clone https://github.com/mostafammy/Quantum-Kernel-Geometry.git
+cd Quantum-Kernel-Geometry
 
 # Create virtual environment (recommended)
 python -m venv venv
@@ -152,18 +156,21 @@ pip install -r requirements.txt
 
 ### Run Experiments
 
+**Interactive Notebooks (Recommended):**
+
 ```bash
-# Experiment 1: Visual Kernel Comparison (Fog vs Crystal)
+jupyter lab notebooks/
+```
+
+**Or run scripts directly:**
+
+```bash
 python notebooks/02_kernel_comparison_script.py
-
-# Experiment 2: Eigenvalue Spectrum Analysis (2-Qubit Bottleneck)
 python notebooks/03_eigenvalue_analysis.py
-
-# Experiment 3: High-Dimensional Scaling (8-Qubit Rank Explosion)
 python notebooks/04_high_dim_scaling.py
 ```
 
-> ⏱️ **Note**: The 8-qubit experiment may take 10-20 seconds on CPU due to quantum simulation overhead.
+> ⏱️ **Note**: The 8-qubit experiment may take 10-20 seconds on CPU.
 
 ---
 
@@ -171,26 +178,23 @@ python notebooks/04_high_dim_scaling.py
 
 ```
 quantum-kernel-geometry/
-├── 📁 notebooks/                    # Experiment scripts
-│   ├── 02_kernel_comparison_script.py   # Heatmap visualization
-│   ├── 03_eigenvalue_analysis.py        # 2-qubit spectral analysis
-│   └── 04_high_dim_scaling.py           # 8-qubit scaling experiment
+├── 📁 notebooks/                         # Interactive experiments
+│   ├── 00_theory_primer.ipynb            # 🎓 Background theory
+│   ├── 02_kernel_comparison.ipynb        # 🔬 Fog vs Crystal
+│   ├── 03_eigenvalue_analysis.ipynb      # 📊 Rank Bottleneck
+│   ├── 04_high_dim_scaling.ipynb         # 🚀 Rank Explosion
+│   └── *.py                              # Script versions
 │
-├── 📁 src/                          # Modular source code
-│   ├── classical/                   # Classical kernel implementations
-│   ├── quantum/                     # Quantum feature maps & kernels
-│   └── visualization/               # Plotting utilities
+├── 📁 src/                               # Importable modules
+│   ├── classical/                        # RBF kernel, spectral analysis
+│   ├── quantum/                          # Feature maps, fidelity kernel
+│   └── visualization/                    # Heatmaps, spectrum plots
 │
-├── 📁 results/
-│   └── figures/                     # Generated visualizations
-│       ├── kernel_comparison.png
-│       ├── eigenvalue_spectrum.png
-│       └── high_dim_scaling.png
-│
-├── 📁 data/                         # Data storage (gitignored)
-├── 📄 requirements.txt              # Python dependencies
-├── 📄 LICENSE                       # MIT License
-└── 📄 README.md                     # This file
+├── 📁 results/figures/                   # Generated visualizations
+├── 📄 environment.yml                    # Binder/Conda environment
+├── 📄 requirements.txt                   # pip dependencies
+├── 📄 LICENSE                            # MIT License
+└── 📄 README.md                          # This file
 ```
 
 ---

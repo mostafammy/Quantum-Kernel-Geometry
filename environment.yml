@@ -1,0 +1,17 @@
+name: quantum-kernel-geometry
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - jupyterlab
+  - pip:
+      - qiskit>=1.0.0
+      - qiskit-machine-learning
+      - qiskit-algorithms
+      - scikit-learn
+      - numpy
+      - matplotlib
+      - seaborn
+      - pandas
